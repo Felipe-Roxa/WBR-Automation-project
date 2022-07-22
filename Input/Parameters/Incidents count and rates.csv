@@ -1,0 +1,15 @@
+site_header;type
+Worked Hours;hours
+Serious Incident;count
+Serious Incident Rate;rate
+Lost Time Incident;count
+Lost Time Incident Rate;rate
+Recordable Incident;count
+Recordable Incident Rate;rate
+First Aid Incident;count
+First Aid Incident Rate;rate
+Serious Near Miss;count
+Serious Near Miss Rate;rate
+Near Miss;count
+Near Miss Rate;rate
+Events;count

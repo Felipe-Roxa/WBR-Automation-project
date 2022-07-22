@@ -1,0 +1,67 @@
+Melhorias:
+- Mudar método de busca de arquivos de global para relativo (ok)
+- Mudar o nome de WHS Anual Metrics para apenas BR Ops WBR Metrics WHS
+- Mudar comentários para strings de documentação
+- Melhorar método de somar cada info semanal para uma categoria com um loop (ok)
+- Fazer método para gerar relatório vazio (ok)
+- Fazer método para carregar dados do quip de um .csv (ok)
+- Garantir que ordem de input de site não importa (ok)
+- Fazer método de calculo de rate de cada site (ok)
+- Fazer método de calculo de rate de cada categoria (ok)
+- Fazer método de input de rate de cada site no arquivo .xlsx (ok)
+- Fazer método de input de rate de cada categoria no arquivo .xlsx (ok)
+- Fazer método de manipular informações no arquivo .xlsx para gerar dados mensais, quadrimestrais e anuais (ok)
+- Garantir que dados mensais e anuais sejam atualizados toda vez (ok)
+- Fazer método que manipula a planilha se tiver o arquivo do quip (ok)
+- Separar método de criação para nao zerar dados (ok)
+- Fazer com que toda criação e manipulação dados dependa de arquivos .csv de input 
+- No método de somatório de cada linha da sheet semanal de cada site, tentar separar incidentes para que worked hours continue recebendo float e os outros recebam int (ok)
+- Melhorar método de busca de input de incidents, separando por hour, count e rate types (ok)
+- Arrumar planilha de output, pois na ultima sheet os meses estao vindo fora de ordem (ok)
+- Fazer com que meses e quarters sejam inputs de arquivo .csv (ok)
+- Fazer método no main para rodar para cada arquivo do quip presente no diretório (ok)
+- Fazer método para que quando for adicionado um novo site, gerar relatorio do zero e ler cada arquivo da pasta do quip para repopular do zero ou adicionar diretamente no.xlsx e zerar toda info até a week que ele o próprio site foi informado (ok)
+- Revisar método que busca ranges de cada periodo por week e column de input na visao anual (ok)
+- Fazer colunas com headers dos sites com header dos arquivos .csv (ok)
+- Cirar método para verificar o que fazer com a primeira row, visto que varia onde começa os períodos (ok)
+- Verificar novamente se rates gerados por site anuais batem, se o algoritmo calcula certo os rates, para depois replicar para os categories (ok)
+- Estudar os passos seguintes para exportar report (ok)
+- Usar metodos do OS para exportar para exportar pdf (ok)
+
+
+Mudanças de planos de algumas melhorias:
+- Fazer programa para transição quando um novo site é adicionado e outro para quando um novo tipo de incidente é adicionado
+- Fazer método no main para verificar existencia do arquivo anual
+- Fazer modulo para quando o método de input semanal estiver buscando dados do quip, se aquele site não estiver no .xlsx, ele chame esse método para inputar no excel dados para esse novo site
+	- Toda vez que o programa roda é criado um novo .xlsx e escrito por cima do antigo, então fazendo o método ou não, o site deve ser classificado pelo .csv, o que não vem do quip, logo é desnecessária essa validação. O mesmo para incidentes.
+
+Questoes:
+- Calculo do rate é algo estático? Se não, fazer com que seja um input
+
+Anotações para manual:
+- Atentar aos detalhes de cada arquivo de input
+	- Extensão .scv
+	- Imput de numeros
+	- Tratamento de valores vazios
+	- "." e ","
+- Quip.csv:
+	- Copiar apenas dados de cada site
+	- Colocar week no formato 'WK25'
+	- Headers deve ter mesmo nome formatado do que incidents count and rates
+		- Garante o funcionamento do método que puxa dados do quip
+- Se aparecer um site novo:
+	- Colocar categoria dele no .csv
+- Há alguns incidentes e horas faltando pois nem todos eram mudados no quip diretamente, era enviado para um dos analista que alguma dado foi alterado e era alterado direto no excel
+	- Com os histórico de quips agora é só alterar diretamente la e exportar para .csv e salva, pois o programa roda dnv toda vez que executado
+	- redistribui melhor a responsabilidade por cada dado para cada site
+	- Rever quips e excel anteriores para preencher corretamente
+	- Mantém tracking da origem dos dados num só lugar
+- Atentar a leitura dos dados, excel por padrão esconde as casas decimais
+- No arquivo do report
+	Data -> Edit Links -> Startup prompt -> Don's display the alert and updtae links
+	Se nao tiver exportando pro report, encerrar excel no gerenciador de tarefas e rodar novamente, para tirar arquivos temporarios
+
+
+
+
+

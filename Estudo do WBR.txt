@@ -1,0 +1,114 @@
+Exportar arquivo excel do Quip (o export pega apenas a sheet aberta)
+Todos os arquvios devems er convertidos para .csv
+SAfety board: ja permite exportar assim
+WBR: verificar melhor
+
+Retornando NaN (Not a Number)
+
+Pode alterar planilha que preenche, mas nao a que tem o coola, pois o formulario que tem na segunda sheet dela é padrão
+Dar prioridade para o WBR!
+
+Verificar a nescessidade de produzir todas as informações geradas visto que no WBR apenas 4 linhas sao mostradas
+- Visa facilitar processamento de informação, descartando procedimentos desnecessários
+- Verificar com Biatriz, Sté ou Mari
+
+Pendencias:
+- Analisar formulas das planilhas usando ctrl + ' (acima do tab)
+- Pensar em um modo de guardar historico para ytd (.json)
+
+Proposta de planilha nova:
+- Todos as categorias de sites numa só sheet
+- Para possibilidade de trata como .csv
+- Era separado em 3 sheets para facilitar ao user preencher manualmente, mas como é uma automação que vai tratar, não há nescessidade dessa divisão
+- Tirar YTD's repetidos
+- Manter mensal e quadrimestral para comparativo com o tableau
+- Colunas A e B vão ser key's values para encontrar informações
+
+Estudo da planilha atual
+- Fórmula para geração de rate semanal de cada site:
+	=+IFERROR(((AB24/AB17)*200000);"")
+	- Divide o a quantidade incidentes pela quantidade de horas trabalhadas de cada site
+	- Multiplica essa razão por 200.000
+	- Se der qualquer tipo de erro, retorna "" (nada)
+- Fórmula para geração de rate de cada categoria de site
+	=IFERROR((F17+F32+F47+F62+F77+F92+F107+F122);"")
+	- Esse é o somatório dos worked hours
+	- Os counts tb são contados assim
+	=+IFERROR(((F3/F$2)*200000);"")
+	- Calculo do rate: pega o somatorio de worked hours e divide pelo somatorio de counts e multiplica por 200.000
+	- O sinal de mais entre o "=" e o "IFERROR" é desnecessário
+
+- Há uma coluna YTD depois das weeks, onde soma-se as worked hours e os counts de todas as semanas e aplica a formula de geração de rate para essas duas somas
+
+- Fórmula para geração de rate mensal de cada site:
+	=IFERROR((SUM('Amazon FCs'!C2:F2));"")
+	- Somatório das worked hours das semanas do mês
+	=IFERROR((SUM('Amazon FCs'!C3:F3));"")
+	- Somatório do count das semanas do mês
+	=+IFERROR(((BE3/BE$2)*200000);"")
+	- Geração do rate de cada incidente, dividindo os somatórios
+	- O "'Amazon FCs'!" indica qual sheet pegar o dado, desnecessário também
+	- O "$" trava o valor de referência quando se copia uma formula para outra celula, geralmente se traav a row, ja que sempre se pega o valor dar worked hour que é colocado no começo da lista de incidentes de cada site
+		- Na automação provavelmente não havera preocupaçoes com isso
+
+- Para cada quarter é usado a mesma estrutura de calculo de rate do mês: Soma as worked hours dos 3 meses e os counts de cada incidentes, e depois aplica a mesma fórmula de divisão dessas duas somas
+- Na última coluna de YTD é somado direto de todos os meses, contrário do que se esperava pelo padrão até agora, mas o calculo do rate continua pegando dados da mesma coluna, dos somatorios dos meses nesse caso
+
+- Para que serve a coluna OP2 21?
+
+- Então o input deve ser a worked hours de cada site e o count de cada incidente de cada site
+	- Para somar worked hours e counts e gerar rate de cada categoria de site
+	- Para somar worked hours e counts e gerar rate mensal
+	- Para somar worked hours e counts e gerar rate quadrimestral
+	- Para somar worked hours e counts e gerar rate YTD
+
+- As 3 sheets de cada categoria de site parecem ter o mesmo comportamento em relação as fórmulas
+
+Prosta para automação:
+- Em uma pasta input, colocar .csv dos dados preenchido pelo quip com algum header com o número da semana atual XX
+- Criar um diretório  "WHS Metrics - Week XX" e um arquivo "WHS Metrics - Week XX.csv", carregando infos do diretório "WHS Metrics - Week (XX - 1).csv"
+- Antes de gravar os dados, salvar uma cópia em outro diretório para backup (necessário?)
+- Em uma pasta output, gerar .csv novo com a week adicionada
+- Fórmulas deve se deixar no código (Alguma chance de mudar logo?)
+- No começo de cada ano deixar o template para a planilha com as semanas para sempre tratar apartir disso
+- Procurar pela week e ir imputando os dados
+- Fazer método para geração de rate
+- Cada semana inputada gera-se novos rates
+	- Efeito cascata:
+	Entra valores da semana, recalcula o mês usando as 4 semanas, recalcula o quarter usando os 3 meses, recalcula o ano usando os 3 quarters
+- Métodos:
+	- Calculo da categoria de site (geral) semanal
+		- Será tratado como um site qualquer
+	- Calculo dos rates mensais
+	- Calculo dos rates quadrimestrais
+	- Calculo dos rates anuais
+
+Arquivos utilizados:
+- Podera ter um arquivo .csv para sempre ser consumido e escrito, mas toda semana que rodar, geral um .xlsx, com sheet semanal e com outra mensal/quadrimestral/anual(ytd)
+- Manter o arquivo .csv em pasta isolado com informação para não mexer (criar backup toda vez que rodar?)
+- Um arquivo determinando quantas week vao ser utilizadas, e quais os meses envolvidos
+
+O que é importante exportar:
+- Dados das últimas duas semanas, dos ultimos dois meses e do ano(YTD)
+- Fazer uma sheet com os dados prontos para serem consumidos para o report padrão
+- montar um report padrão no python inputando as formulas do excel como strings?
+	- Sairia todas as sheets em um arquivo .xlsx
+	- Qual seria a formatação (stilo, fontes e linhas)?
+- O repor padrão usa formulas como "Sheet!" para pegar valores da sheet cola e formula de arredondar valores "ROUND"
+
+Arquivos de input em .csv:
+- Arquivo com relação week/month
+- Arquivo com relação site/category
+
+Melhoria
+- Arquivo do tipo formulário para cada site, com a quantidade de incidentes , worked hours e events (fazer um manual igual safety board para cada um preencher - substituiria p quip)
+
+
+
+
+
+
+
+
+
+

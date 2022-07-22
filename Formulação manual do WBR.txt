@@ -1,0 +1,32 @@
+Report semanal em excel salvo em pasta compartilhada (WHS Metrics WBR) "WK XX";
+Começar as 11h da manhã da segunda (teoricamente onde todos os sites devem ter preenchido);
+Era para ser extraido do Tableau direto mas há um delay;
+Passar toda segunda-feira para o time de finance até as 16hrs (um dia antes da WBR)
+Copiar e colar em nova pasta local os arquivos "BR Ops WBR Metrics WHS 2022..xlsx", "safety_br_ops.pdf" e "WHS Weekly Metrics Report V3.xlsx"
+
+Excel "BR Ops WBR Metrics WHS 2022..xlsx":
+- 3 sheet's, cada uma com os metrics de safety detalhados de todos os FC's, 3PL FC's e AMZL Sites de semana em semana
+- Cada Sheet tem o panorama geral e em seguida detalhada para cada unidade
+- Entre o envio para o time de finance e o WBR, podem atualizar
+
+Quip "BR Ops WHS Metrics - WBR 2022":
+- Planilha com todas as horas trabalhadas e os incidentes que ocorreram na semana de cada FC's, 3PL FC's e AMZL Sites por cada WHS Lider
+- Selecionar sheet da semana anterior
+- Passar manualmente cada quantidade de horas trabalhadas e de incidentes de cada site para para "BR Ops WBR Metrics WHS 2022.xlsx" gerar os rates tanto das "week's" quanto dos "YTD's" (year to date)
+
+Excel "WHS Weekly Metrics Report V3.xlsx":
+- Abrir sheet "Cola"
+- Renomear headers com as duas últimas semanas
+- Em "Weekly", copiar e colar dados das colunas das duas últimas semanas e do "YTD" de cada sheet de "BR Ops WBR Metrics WHS 2022.xlsx"
+- Em "Monthly/Quarter", copiar e colar dados das colunas dos dois últimos meses (ou só do último) e do "YTD" de cada sheet de "BR Ops WBR Metrics WHS 2022.xlsx"
+- As sheet's "Cola" e "Amazon OPS WHS Weekly Metrics" estão linkadas, então não se deve editar nada na última
+- Salva como PDF na pasta criada só da sheet como "safety_br_ops"
+
+Outlook:
+- Enviar para " doc+bropswbr-8@fusion.amazon.dev", "Martins, Larissa" (finance de GRU5), "Biatriz Romcy" e "jeanpire@amazon.com" (fazem prévia da WBR com o time de finance)
+- Quando alguém mandar atualização sobre incidente via Chime, atualizar para mandar report novamente para "doc+bropswbr-8@fusion.amazon.dev"
+- Qualquer alteração na terça-feira, enviar até as 9h, e reenviar adicionando em copia "financefc-br-ops@amazon.com"
+- Se nescessário, entrar em contato com Biatriz Romcy
+- Não colocar assunto nem corpo, apenas o safety_br_ops.pdf
+
+Copiar e colar da nova pasta local para o diretório novamente, substituindo os arquivos "BR Ops WBR Metrics WHS 2022..xlsx", "safety_br_ops.pdf" e "WHS Weekly Metrics Report V3.xlsx" pelas novas versões;

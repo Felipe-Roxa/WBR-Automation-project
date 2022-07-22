@@ -1,0 +1,19 @@
+Divergências do BR Ops WBR Metrics WHS 2022 em relação a automação (quips)
+AmazonFC
+*Jan/22
+*Week01
+*GIG1
+*+4 SNM E -4 NM
+
+*JUN/22
+*Week24
+*GRU8
+*+1 LTI, +1 RI e -1 FAI
+
+*JUN/22
+*Week26
+*POA1 (29696,82 x 31250,02)
+*-2000 WH
+*Amazon FCs (4 dados escritos por cima da fórmula, sendo dois deles os seguintes)
+*-1 FAI
+*-2 NM
